@@ -2,7 +2,10 @@
 import React, { useState } from "react"
 import Cookies from "js-cookie";
 import '../App.css'
+import {useSelector,useDispatch} from 'react-redux'
 export default function Registerform(props) {
+  const dispatch = useDispatch()
+  const selector = useSelector((state) => state)
   const isAuthenticated = !!Cookies.get("token");
   if (isAuthenticated) {
     props.history.push("/App");
@@ -15,6 +18,7 @@ export default function Registerform(props) {
   let [signemail,setSignemail] = useState('')
   let [signpwd,setSignpwd] = useState('')
   let [resultmessage,setResultmessage] = useState('')
+  let [layout,setLayout] = useState('')
   const changeAuthMode = () => {
     setAuthMode(authMode === "signin" ? "signup" : "signin")
   }
@@ -40,7 +44,11 @@ export default function Registerform(props) {
   }
   const handleSignPwd = (e) =>
   {
-    setSignpwd(e.target.value)
+      setSignpwd(e.target.value)
+  }
+  const handleLayout = (e) =>
+  {
+      setLayout(e.target.value)
   }
   const handleLogin = async () =>
   {
@@ -61,6 +69,7 @@ export default function Registerform(props) {
             if (result.access_token !== '')
             {
               Cookies.set("token",result.access_token)
+              dispatch({type:'AddLayout',payload:layout})
                 props.history.push("/App")
             }
             
@@ -120,6 +129,15 @@ export default function Registerform(props) {
                 className="form-control mt-1"
                 placeholder="Enter password"
                 onChange={(e)=>{handleSignPwd(e)}}
+              />
+            </div>
+            <div className="form-group mt-3">
+              <label>Layout</label>
+              <input
+                type="text"
+                className="form-control mt-1"
+                placeholder="Enter Layout"
+                onChange={(e)=>{handleLayout(e)}}
               />
             </div>
             <div className="d-grid gap-2 mt-3">

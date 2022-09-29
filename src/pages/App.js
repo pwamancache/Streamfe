@@ -12,6 +12,7 @@ import PreviewModal from './Previewmodal.js'
 import {Link} from 'react-router-dom'
 import Cookies from "js-cookie";
 import '../App.css';
+import {Helmet} from 'react-helmet'
 function App(props) {
   //const [widgets,setWidgets] = useState([{}])
   const isAuthenticated = !!Cookies.get("token");
@@ -118,6 +119,12 @@ function App(props) {
     return result
   }
   return (
+    <>
+    <Helmet>
+       <title>Patterns</title>
+        <meta name="description" content="Patterns" />
+        <meta name="theme-color" content="#008f68" />
+    </Helmet>
     <Container>
       <DragDropContext onDragEnd = {ondragEnd}>
        <Droppable
@@ -139,6 +146,7 @@ function App(props) {
       <Col><Link to="/published" ><Button variant="danger">Deploy</Button></Link></Col>
       </Row>
     </Container>
+    </>
   );
 }
 export default App;

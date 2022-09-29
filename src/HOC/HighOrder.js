@@ -3,17 +3,26 @@ import {Container,Row,Col,Card,Button} from 'react-bootstrap'
 import Apicall from '../Api/Api'
 import Cookies from "js-cookie";
 import Spinner from 'react-bootstrap/Spinner';
+import {useDispatch,useSelector} from 'react-redux'
  function HighOrder(props) {
     const[loading,setLoading] = useState(false)
    const [data,setData] = useState([])
+   const dispatch = useDispatch()
+   const selector = useSelector((state) => state)
+   
     useEffect(()=>
     {
         const fetchApi = async () => {
         const result =   await Apicall(props.url)
         setData(result)
         setLoading(true)
+        return result
         }
         fetchApi()
+
+       // dispatch({type:'FetchGuidelines'})
+       
+        
     },[])
 
 switch (props.type)

@@ -21,7 +21,7 @@ function Preview(props) {
         const result = await res.json()
         setWidgetproduct(result)
         console.log('inside ' + result)
-        return result.json()
+        return result
     }
     useEffect(()=>
     {

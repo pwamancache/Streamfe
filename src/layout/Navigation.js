@@ -15,6 +15,9 @@ function Navigationbar(props) {
           <Nav className="me-auto">  
          <Link to="Guidelines">Guidelines</Link>
           </Nav>
+          <Nav className="me-auto">  
+         <Link to="HOCGuidelines">HOCGuidelines</Link>
+          </Nav>
           <Nav >
           <Logout/>
           </Nav>
